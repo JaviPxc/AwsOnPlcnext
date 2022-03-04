@@ -72,6 +72,7 @@ Seguir los pasos de esta sección para configurar su equipo como dispositivo de 
    - Paso __3.2: configurar las credenciales de AWS en el dispositivo__. El instalador de Greengrass utiliza las credenciales de AWS para aprovisionar los recursos de AWS que necesita. Para aumentar la seguridad, le recomendamos que obtenga credenciales temporales para un rol de IAM que sólo permita los permisos mínimos necesarios para el aprovisionamiento. Para obtener más información, consultar [Política de IAM mínima para que el instalador aprovisione los recursos](https://docs.aws.amazon.com/greengrass/v2/developerguide/provision-minimal-iam-policy.html). Puede proporcionar credenciales como variables de entorno. Para ello, en su dispositivo, realice una de las siguientes acciones para recuperar las credenciales y ponerlas a disposición del instalador de AWS IoT Greengrass Core:
       - Opción 1: Utilizar las credenciales a largo plazo de un usuario de IAM:
          - Proporcionar el ID de la clave de acceso y la clave de acceso secreta del usuario de IAM. Para obtener más información sobre cómo recuperar credenciales a largo plazo, consultar [Administración de claves de acceso para usuarios de IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+          ![image](https://user-images.githubusercontent.com/46561573/156746711-227d0a4d-b1d7-444d-b157-eb1691a63e98.png)
          - Ejecutar los siguientes comandos (Linux) para proporcionar las credenciales al software del núcleo de AWS IoT Greengrass (sustituir el texto después del signo “=” por la información especificada).
          ```
             export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
@@ -85,13 +86,22 @@ Seguir los pasos de esta sección para configurar su equipo como dispositivo de 
             export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
             export AWS_SESSION_TOKEN=AQoDYXdzEJr1K...o5OytwEXAMPLE=
           ```
+_Nota_: El instalador no guarda ni almacena sus credenciales.
 
-Nota
-El instalador no guarda ni almacena sus credenciales.
+   - Paso __3.3: ejecutar el instalador__. AWS IoT Greengrass proporciona un instalador que se puede utilizar para configurar un dispositivo de Greengrass Core en cuestión de minutos. El instalador se ejecuta en el dispositivo y hace lo siguiente:
+      - Aprovisiona el dispositivo de Greengrass Core como un objeto de AWS IoT con un certificado de dispositivo y permisos predeterminados. [Más información](https://docs.aws.amazon.com/console/greengrass/v2/provision-greengrass-core).
+      - Crear un usuario y un grupo del sistema, ggc_user y ggc_group, que el software utiliza para ejecutar componentes en el dispositivo. Realizado previamente en (https://github.com/JaviPxc/LinuxOnPLCnext/blob/main/AWS_IoT_Greengrass_EPC.md#configurar-un-dispositivo-Linux).
+      - Conectar el dispositivo a AWS IoT.
+      - Instalar y ejecutar el software más reciente de AWS IoT Greengrass Core como servicio del sistema.
+   Para ello, ejecutar los siguientes comandos:
+      - Ejecutar el comando: ```curl -s https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip > greengrass-nucleus-latest.zip && unzip greengrass-nucleus-latest.zip -d GreengrassCore```. Para descargar la última versión del software AWS IoT Greengrass Core en un fichero _greengrass-nucleus-latest.zip_ y descomprimirlo en _GreengrassCore_.
+      - Ejecutar el comando: ```sudo -E java -Droot="/greengrass/v2" -Dlog.store=FILE -jar ./GreengrassCore/lib/Greengrass.jar --aws-region eu-west-2 --thing-name GreengrassQuickStartCoreHolcim --thing-group-name GreengrassQuickStartHolcimGroup --component-default-user ggc_user:ggc_group --provision true --setup-system-service true --deploy-dev-tools true```. Para ejecutar el instalador, 
+      
+      . Este comando utiliza los nombres de cosas y grupos de cosas de AWS IoT que especificó anteriormente para ejecutar el instalador del software del núcleo de AWS IoT Greengrass y configurar los recursos de AWS para su dispositivo central.
 
 
 
-https://docs.aws.amazon.com/greengrass/v2/developerguide/provision-minimal-iam-policy.html
+
 
 
 ### Instalar el software AWS IoT Greengrass Core (CLI)
