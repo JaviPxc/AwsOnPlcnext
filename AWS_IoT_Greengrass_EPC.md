@@ -143,6 +143,23 @@ Si se ha podido ejecutar, el software imprime el siguiente mensaje si se lanza c
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+XXXXXXXXX   TO BE TESTED XXXXXXXXXXXXXX
+
 https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
 dpkg -i jdk-17_linux-x64_bin.deb
 
