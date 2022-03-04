@@ -54,11 +54,10 @@ Para configurar un dispositivo Linux con AWS IoT Greengrass V2:
 
 
 ## Instalar el software de AWS IoT Greengrass Core
-Seguir los pasos de esta sección para configurar su equipo como dispositivo del núcleo de AWS IoT Greengrass que puede utilizar para el desarrollo local. En esta sección, descarga y ejecuta un instalador que hace lo siguiente para configurar el software del núcleo de AWS IoT Greengrass para su dispositivo:
+Seguir los pasos de esta sección para configurar su equipo como dispositivo de AWS IoT Greengrass Core que puede utilizar para el desarrollo local. En esta sección, descarga y ejecuta un instalador que hace lo siguiente para configurar el software de AWS IoT Greengrass Core para su dispositivo:
+- Instalar el componente nucleus de Greengrass. Nucleus es un componente obligatorio y es el requisito mínimo para ejecutar el software de AWS IoT Greengrass Core en un dispositivo. Para obtener más información, consultar [componente nucleus de Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html).
 
-Instala el componente del núcleo de Greengrass. El núcleo es un componente obligatorio y es el requisito mínimo para ejecutar el software del núcleo de AWS IoT Greengrass en un dispositivo. Para obtener más información, consulte el componente de núcleo de Greengrass.
-
-Registra su dispositivo como algo de AWS IoT y descarga un certificado digital que permite a su dispositivo conectarse a AWS. Para obtener más información, consulte Autenticación y autorización de dispositivos para AWS IoT Greengrass.
+Registrar su dispositivo como algo de AWS IoT y descarga un certificado digital que permite a su dispositivo conectarse a AWS. Para obtener más información, consulte Autenticación y autorización de dispositivos para AWS IoT Greengrass.
 
 Añade el objeto de AWS IoT del dispositivo a un grupo de objetos, que es un grupo o flota de objetos de AWS IoT. Los grupos de cosas le permiten administrar flotas de dispositivos centrales de Greengrass. Cuando implementa componentes de software en sus dispositivos, puede elegir implementar en dispositivos individuales o en grupos de dispositivos. Para obtener más información, consulte Administración de dispositivos con AWS IoT en la Guía para desarrolladores del núcleo de AWS IoT.
 
