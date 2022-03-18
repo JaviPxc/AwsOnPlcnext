@@ -3,7 +3,7 @@ Para configurar un dispositivo Linux con AWS IoT Greengrass V2:
 
 1. Instalar el tiempo de ejecución de __Java__, que el software de AWS IoT Greengrass core requiere para ejecutarse. Se recomienda Amazon Corretto 11 u OpenJDK 11. Los siguientes comandos le muestran cómo instalar OpenJDK en su dispositivo.
    - ```mkdir /opt/plcnext/aws```. Crear un directorio donde instalar todo el software relacionado con AWS.
-   - ```cd /opt/plcnext/aws```. Cambiar a ese directorio.
+   - ```cd /opt/plcnext/aws```. Cambiar a este directorio.
    - ```wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz```. Para descargar última versión de java. Se puede descargar en formato comprimido para Linux x64 desde https://www.oracle.com/java/technologies/downloads/#jdk17-linux o bien desde https://jdk.java.net/17/
    - ```tar -xvf jdk-17_linux-x64_bin.tar.gz```. Para descomprimir el fichero descargado con el entorno Java.
    - ```su```. Loguearse como usuario root.
