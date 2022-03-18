@@ -1,48 +1,24 @@
 [Tutorial de introducción](https://docs.aws.amazon.com/es_es/greengrass/v2/developerguide/getting-started.html) para aprender acerca de las características básicas de AWS IoT Greengrass V2.
 
-# Pasos previos
-- Tener una cuenta de AWS. Consultar como [configurar una cuenta de AWS](https://docs.aws.amazon.com/es_es/greengrass/v2/developerguide/setting-up.html#set-up-aws-account).
-   - Tener creado un usuario en AWS Identity and Access Management (IAM) con permisos de administrador.
-   - Un equipo de desarrollo con Windows, macOS o UNIX con conexión a Internet.
-   - Un dispositivo para configurarlo como Greengrass core device (EPC) con conexión a Internet y permisos de administrador.  
-   - Tener Python3.5 o posterior instalado en el dispositivo e incluido en el PATH.
+
+# Configurar una cuenta de AWS
+- [Configurar una cuenta de AWS](https://github.com/JaviPxc/AwsOnPlcnext/blob/main/docs/AWS_account_config.md#configurar-una-cuenta-de-aws).
+- [Crear un usuario en AWS Identity and Access Management (IAM) con permisos de administrador](https://github.com/JaviPxc/AwsOnPlcnext/blob/main/docs/AWS_account_config.md#crear-un-usuario-administrador-y-añadir-el-usuario-a-un-grupo-de-administradores).
+
+# Configurar el entorno
+- Comprobar que el dispositivo tiene [acceso a internet](https://github.com/JaviPxc/LinuxOnPLCnext/blob/main/Comprobar_acceso_a_internet.md).
+- Comprobar que el dispositivo tiene Python3.5 o posterior instalado.
+   - Introducir este comando: ```python3 --version```.
+- [Configurar el entorno para AWS IoT Greengrass Core en un dispositivo Linux]https://github.com/JaviPxc/AwsOnPlcnext/blob/main/docs/AWS_device_env_config.md#configurar-el-entorno-en-un-dispositivo-linux).
+
+# Instalar AWS CLI en el dispositivo
    - AWS Command Line Interface(AWS CLI) instalado y configurado con credenciales en el equipo de desarrollo y en el dispositivo. Asegúrese de usar la misma Región de AWS para configurar el AWS CLI en el equipo de desarrollo y en el dispositivo. Para utilizar AWS IoT Greengrass V2 con AWS CLI, debe tener una de las siguientes versiones o posterior:
       - Versión mínima de AWS CLI V1: v1.18.197
       - Versión mínima de AWS CLI V2: v2.1.11
+https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html
 
-## Configurar una cuenta de AWS
-
-
-
-https://docs.aws.amazon.com/greengrass/v2/developerguide/getting-started.html
-
-## Configurar el entorno
-Seguir los pasos de esta sección para configurar un dispositivo Linux o Windows para utilizarlo como su dispositivo central de AWS IoT Greengrass.
-### Configurar un dispositivo Linux
-Para configurar un dispositivo Linux con AWS IoT Greengrass V2:
-
-1. Instalar el tiempo de ejecución de __Java__, que el software de AWS IoT Greengrass core requiere para funcionar. Le recomendamos que utilice Amazon Corretto 11 u OpenJDK 11. Los siguientes comandos le muestran cómo instalar OpenJDK en su dispositivo.
-   - ```wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz```. Para descargar última versión de java. Se puede descargar en formato comprimido para Linux x64 desde https://www.oracle.com/java/technologies/downloads/#jdk17-linux o bien desde https://jdk.java.net/17/
-   - ```tar -xvf jdk-17_linux-x64_bin.tar.gz```. Para descomprimir el fichero descargado con el entorno Java.
-   - ```ln -sfn /home/j92nt7/awscli/jdk-17.0.2/bin/java /usr/bin/java```. Crear un enlace símbolico que apunte al ejecutable de Java dentro de un directorio contenido en $PATH.
-   - ```java --version```. Comprobar que Java está incluido en el PATH y la versión instalada.
-![image](https://user-images.githubusercontent.com/46561573/156546221-3f0b64ec-aa5c-454c-aa99-4a92aa53c572.png)
-2. (Opcional) Crear el usuario y el grupo del sistema por defecto que ejecuta los componentes en su dispositivo. También puede optar por dejar que el instalador del software de AWS IoT Greengrass core cree este usuario y grupo durante la instalación con el argumento del instalador --component-default-user. Para obtener más información, consulte [Argumentos del instalador](https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-installer.html).
-   - ```sudo useradd --system --create-home ggc_user```
-   - ```sudo groupadd --system ggc_group```
-3. Comprobar que el usuario que ejecuta el software de AWS IoT Greengrass core (normalmente root), tiene permiso para ejecutar sudo con cualquier usuario y cualquier grupo.
-   - ```sudo visudo```. Para abrir el archivo __/etc/sudoers__.
-   - Verificar que el permiso para el usuario sea como el siguiente ejemplo. ```root ALL=(ALL:ALL) ALL```
-4. Instalar todas las demás dependencias necesarias en su dispositivo como se indica en la lista de requisitos en [Requisitos del dispositivo](https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html#greengrass-v2-requirements).
-
-
-## Instalar el software de AWS IoT Greengrass Core
+# Instalar el software AWS IoT Greengrass Core
 Seguir los pasos de esta sección para configurar su equipo como dispositivo de AWS IoT Greengrass Core que puede utilizar para el desarrollo local. En esta sección, descarga y ejecuta un instalador que hace lo siguiente para configurar el software de AWS IoT Greengrass Core para su dispositivo:
-- Registrar su dispositivo como objeto de AWS IoT y descarga un certificado digital que permite a su dispositivo conectarse a AWS. Para obtener más información, consultar  [Autenticación y autorización de dispositivos para AWS IoT Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/device-auth.html).
-- Añadir el objeto de AWS IoT a un grupo de objetos de AWS IoT. Los grupos de objetos permiten administrar flotas de dispositivos Greengrass. Cuando implementa componentes de software en sus dispositivos, puede elegir implementar en dispositivos individuales o en grupos de dispositivos. Para obtener más información, consultar [Administración de dispositivos con AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/iot-thing-management.html) en la Guía para desarrolladores del núcleo de AWS IoT.
-- Crear el rol de IAM que permite al dispositivo de Greengrass Core interactuar con los servicios de AWS. Por defecto, este rol permite a su dispositivo interactuar con AWS IoT y enviar registros a Amazon CloudWatch Logs. Para obtener más información, consultar [Autorizar a los dispositivos core que interactúen con los servicios de AWS](https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html).
-- Instalar el componente nucleus de Greengrass. Nucleus es un componente obligatorio y es el requisito mínimo para ejecutar el software de AWS IoT Greengrass Core en un dispositivo. Para obtener más información, consultar [componente nucleus de Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html).
-- Instalar la interfaz de línea de comandos de AWS IoT Greengrass (greengrass-cli), que puede utilizar para probar los componentes personalizados que desarrolle en el dispositivo core. Para obtener más información, consultar [Interfaz de línea de comandos de Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/gg-cli.html).
 
 ### Instalar el software AWS IoT Greengrass Core (consola)
 1. Iniciar sesión en la [consola de AWS IoT Greengrass](https://console.aws.amazon.com/greengrass).
@@ -115,12 +91,6 @@ _Nota_: Si tienes un dispositivo Linux y no tiene __systemd__, el instalador no 
 Si se ha podido ejecutar, el software imprime el siguiente mensaje si se lanza con éxito: _Launched Nucleus successfully._ En este caso es necesario dejar el shell de comandos actual abierto para mantener el software de AWS IoT Greengrass Core en ejecución.
 
 
-
-
-
-
-### Instalar o actualizar la última versión de AWS CLI (CLI)
-https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html
 
 
 
