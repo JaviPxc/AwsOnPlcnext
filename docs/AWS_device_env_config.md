@@ -6,9 +6,9 @@ Para configurar un dispositivo Linux con AWS IoT Greengrass V2:
    - ```cd /opt/plcnext/aws```. Cambiar a este directorio.
    - ```wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz```. Para descargar última versión de java. Se puede descargar en formato comprimido para Linux x64 desde https://www.oracle.com/java/technologies/downloads/#jdk17-linux o bien desde https://jdk.java.net/17/
    - ```tar -xvf jdk-17_linux-x64_bin.tar.gz```. Para descomprimir el fichero descargado con el entorno Java.
-   - ```su```. Loguearse como usuario root.
    - ```ln -sfn /opt/plcnext/aws/jdk-17.0.2/bin/java /usr/bin/java```. Crear un enlace símbolico que apunte al ejecutable de Java dentro de un directorio contenido en $PATH.
    - ```file /opt/plcnext/aws/jdk-17.0.2/bin/java```. Mostrar la ruta del intérprete para el ejecutable de java. Probablemente será /lib64/ld-linux-x86-64.so.2 y probablemente no exista.
+   - ```su```. Loguearse como usuario root.
    - ```mkdir /lib64```- Crear el directorio lib64.
    - ```ln -sf /lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2```. Crear un enlace simbólico en el nuevo directorio que apunte a la librería existente.
    - ```java --version```. Comprobar que Java está incluido en el PATH y la versión instalada.
