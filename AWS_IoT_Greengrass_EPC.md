@@ -9,7 +9,7 @@
 - Comprobar que el dispositivo tiene [acceso a internet](https://github.com/JaviPxc/LinuxOnPLCnext/blob/main/Comprobar_acceso_a_internet.md).
 - Comprobar que el dispositivo tiene Python3.5 o posterior instalado.
    - Introducir este comando: ```python3 --version```.
-- [Configurar el entorno para AWS IoT Greengrass Core en un dispositivo Linux](https://github.com/JaviPxc/AwsOnPlcnext/blob/main/docs/AWS_device_env_config.md#configurar-el-entorno-en-un-dispositivo-linux).
+- [Configurar el entorno para AWS IoT Greengrass Core en un dispositivo Linux](https://github.com/JaviPxc/AwsOnPlcnext/blob/main/docs/AWS_device_env_config.md#configurar-el-entorno-en-un-dispositivo-linux) (instalación de Java).
 
 # Instalar AWS CLI en el dispositivo
    - AWS Command Line Interface(AWS CLI) instalado y configurado con credenciales en el equipo de desarrollo y en el dispositivo. Asegúrese de usar la misma Región de AWS para configurar el AWS CLI en el equipo de desarrollo y en el dispositivo. Para utilizar AWS IoT Greengrass V2 con AWS CLI, debe tener una de las siguientes versiones o posterior:
